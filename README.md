@@ -1,3 +1,16 @@
-# app-express
+### `Kevin App-Express`
 
-### Kevin Fiorentino
+### INSTALL
+
+- `npm install`
+- `npm devstart`
+- localhost:8080/
+
+#### Dependencias utilizadas
+
+- Express
+- @usig-gcba/mapa-interactivo
+
+---
+##### Proyecto realizado en el marco del Curso de NodeJS, Express y MongoDB
+##### Coursera - Universidad Austral, Octubre 2020
