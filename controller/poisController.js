@@ -14,3 +14,12 @@ exports.pois_create = function(req, res) {
         Pois: pois
     });
 } 
+
+exports.pois_delete = function(req, res) {
+    
+    Pois.remove(req.body.pois_id);
+
+    res.status(200).json({
+        message: "Pois borrado correctamente"
+    });
+} 

@@ -6,11 +6,8 @@ const { pois } = require('../model/Pois');
 
 router.get('/', poisController.pois_list);
 
-/*
-router.post('/agregar', function(req, res, next) {
-  res.send('otra ruta');
-});
-*/
 router.post('/agregar', poisController.pois_create);
+
+router.delete('/eliminar', poisController.pois_delete);
 
 module.exports = router;

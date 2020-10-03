@@ -13,21 +13,24 @@ var icon = L.icon({
     iconUrl: '../images/marker-icon-violeta.png',
 });
 
+// Cargamos los puntos iniciales en el mapa
 $.ajax({
     type: "GET",
     dataType: "json",
     url: "http://localhost:8080/pois",
     success: function(response_api) {
 
-        response_api.pois.forEach(value => {
-            L.marker([value.lat, value.long], {icon: icon})
-            .addTo(mapaInteractivo.map)
+        response_api.pois.forEach( (value, index) => {
+            var marker = L.marker([value.lat, value.long], {icon: icon});
+
+            marker.addTo(mapaInteractivo.map)
             .bindPopup(`
                 <div class="fichaMarkerMapa">
                     <h5>${value.nombre}</h5>
-                    <p>Buenos Aires</p>
+                    <button onclick="eliminar_punto('${value.pois_id}', ${marker._leaflet_id})" class="waves-effect waves-light btn-small red darken-4">Eliminar</button>
                 </div>`
             );
+            
         });
 
     }
@@ -37,6 +40,7 @@ function agregar_punto() {
     let nombre_pois = document.getElementById("nombre_pois").value;
     let direccion_pois = document.getElementById("direccion_pois").value;
 
+    // Consultamos el servicio de USIG para traducir una dirección en latitud y longitud
     $.ajax({
         type: "GET",
         dataType: "json",
@@ -49,6 +53,7 @@ function agregar_punto() {
                 long: response_usig.direccionesNormalizadas[0].coordenadas.x
             };
 
+            // Agregamos el punto al back
             $.ajax({
                 type: "POST",
                 dataType: "json",
@@ -56,12 +61,13 @@ function agregar_punto() {
                 url: "http://localhost:8080/pois/agregar",
                 success: function(response_api) {
 
-                    L.marker([response_api.Pois.lat, response_api.Pois.long], {icon: icon})
-                    .addTo(mapaInteractivo.map)
+                    var marker = L.marker([response_api.Pois.lat, response_api.Pois.long], {icon: icon});
+                    
+                    marker.addTo(mapaInteractivo.map)
                     .bindPopup(`
                         <div class="fichaMarkerMapa">
                             <h5>${response_api.Pois.nombre}</h5>
-                            <p>Buenos Aires</p>
+                            <button onclick="eliminar_punto('${response_api.Pois.pois_id}', ${marker._leaflet_id})" class="waves-effect waves-light btn-small red darken-4">Eliminar</button>
                         </div>`
                     );
 
@@ -71,3 +77,29 @@ function agregar_punto() {
     });
 
 }
+
+
+function eliminar_punto(pois_id, marker_id) {
+
+    let data = {
+        pois_id: pois_id
+    };
+
+    $.ajax({
+        type: "DELETE",
+        dataType: "json",
+        data: data,
+        url: "http://localhost:8080/pois/eliminar",
+        success: function(response_api) {
+
+            // Borramos el marker del mapa
+            mapaInteractivo.map.eachLayer(function (layer) {
+                if(layer._leaflet_id == marker_id) {
+                    mapaInteractivo.map.removeLayer(layer);
+                }
+            });
+        }
+    })
+
+}
+
