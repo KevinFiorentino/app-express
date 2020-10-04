@@ -1,13 +1,13 @@
-var Pois = require("../model/Pois");
+const Pois = require("../model/Pois");
 
-exports.pois_list = function(req, res) {
+const pois_list = (req, res) => {
     res.status(200).json({
         pois: Pois.pois
     })
 }
 
-exports.pois_create = function(req, res) {
-    let pois = new Pois(req.body.nombre, req.body.lat, req.body.long);
+const pois_create = (req, res) => {
+    let pois = new Pois(req.body.titulo, req.body.lat, req.body.long);
     Pois.add(pois);
 
     res.status(200).json({
@@ -15,7 +15,7 @@ exports.pois_create = function(req, res) {
     });
 } 
 
-exports.pois_delete = function(req, res) {
+const pois_delete = (req, res) => {
     
     Pois.remove(req.body.pois_id);
 
@@ -23,3 +23,9 @@ exports.pois_delete = function(req, res) {
         message: "Pois borrado correctamente"
     });
 } 
+
+module.exports = {
+    pois_list,
+    pois_create,
+    pois_delete
+}

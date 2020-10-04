@@ -1,13 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const poisController = require("../controller/poisController");
 
-var poisController = require("../controller/poisController");
-const { pois } = require('../model/Pois');
 
 router.get('/', poisController.pois_list);
-
 router.post('/agregar', poisController.pois_create);
-
 router.delete('/eliminar', poisController.pois_delete);
+
 
 module.exports = router;

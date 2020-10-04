@@ -1,11 +1,13 @@
+const mongoose = require('mongoose');
 const uuid = require("uuid");
 
-var Pois = function (nombre, lat, long) {
+var Pois = function (titulo, lat, long) {
     this.pois_id = uuid.v4();
-    this.nombre = nombre;
+    this.titulo = titulo;
     this.lat = lat;
     this.long = long;
 }
+
 
 Pois.pois = [];
 Pois.add = function(newPois) {

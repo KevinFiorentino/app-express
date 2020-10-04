@@ -26,7 +26,7 @@ $.ajax({
             marker.addTo(mapaInteractivo.map)
             .bindPopup(`
                 <div class="fichaMarkerMapa">
-                    <h5>${value.nombre}</h5>
+                    <h5>${value.titulo}</h5>
                     <button onclick="eliminar_punto('${value.pois_id}', ${marker._leaflet_id})" class="waves-effect waves-light btn-small red darken-4">Eliminar</button>
                 </div>`
             );
@@ -37,7 +37,7 @@ $.ajax({
 })
 
 function agregar_punto() {
-    let nombre_pois = document.getElementById("nombre_pois").value;
+    let titulo_pois = document.getElementById("titulo_pois").value;
     let direccion_pois = document.getElementById("direccion_pois").value;
 
     // Consultamos el servicio de USIG para traducir una dirección en latitud y longitud
@@ -48,7 +48,7 @@ function agregar_punto() {
         success: function(response_usig) {
 
             let data = {
-                nombre: nombre_pois,
+                titulo: titulo_pois,
                 lat: response_usig.direccionesNormalizadas[0].coordenadas.y,
                 long: response_usig.direccionesNormalizadas[0].coordenadas.x
             };
@@ -66,7 +66,7 @@ function agregar_punto() {
                     marker.addTo(mapaInteractivo.map)
                     .bindPopup(`
                         <div class="fichaMarkerMapa">
-                            <h5>${response_api.Pois.nombre}</h5>
+                            <h5>${response_api.Pois.titulo}</h5>
                             <button onclick="eliminar_punto('${response_api.Pois.pois_id}', ${marker._leaflet_id})" class="waves-effect waves-light btn-small red darken-4">Eliminar</button>
                         </div>`
                     );

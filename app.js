@@ -7,9 +7,11 @@ const sassMiddleware = require('node-sass-middleware');
 
 const indexRouter = require('./routes/index');
 const routesPois = require('./routes/routesPois');
+const routesUsuarios = require('./routes/routesUsuarios');
 
 const app = express();
 
+// Configuración de Express
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -24,8 +26,11 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// Rutas de la API
 app.use('/', indexRouter);
 app.use('/pois', routesPois);
+app.use('/users', routesPois);
 
 
 app.listen(process.env.PORT || 8080, () => {
