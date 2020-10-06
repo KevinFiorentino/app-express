@@ -1,19 +1,25 @@
-// Import MongoDB connect
-//var mongoose = require('mongoose');
 const MongoDB = require('../model/database/configDataBase');
 const Usuario = require("../model/Usuario");
 
 
-
 const get = (req, res) => {
-    let user_id = req.body.user_id;
+    let user_id = req.param.user_id;
 
-    Usuario.findByUUID(user_id, function(err, user) {
-        if (err) res.send(err);
-        res.status(200).json({
-            Usuario: user
+    if (user_id) {
+        Usuario.findByUUID(user_id, function(err, user) {
+            if (err) res.send(err);
+            res.status(200).json({
+                Usuario: user
+            });
         });
-    });
+    } else {
+        Usuario.getPois(function(err, user) {
+            if (err) res.send(err);
+            res.status(200).json({
+                Usuario: user
+            });
+        });
+    }
 }
 
 const post = (req, res) => {
@@ -23,17 +29,14 @@ const post = (req, res) => {
     });
     Usuario.add(usuario, function(err, user) {
         if (err) res.send(err);
-        console.log(user)
+        res.status(201).json({
+            Usuario: user
+        });
     })
-    res.status(201).json({
-        Usuario: usuario
-    });
 }
-
 
 const del = (req, res) => {
     let user_id = req.body.user_id;
-
     Usuario.removeByUUID(user_id, function(err, del) {
         if (err) res.send(err);
         res.status(200).send(del)

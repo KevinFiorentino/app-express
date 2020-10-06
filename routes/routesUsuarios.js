@@ -4,8 +4,8 @@ const usuarioController = require("../controller/usuarioController");
 
 
 router.get('/', usuarioController.get);
-router.post('/agregar', usuarioController.post);
-router.delete('/eliminar', usuarioController.del);
+router.post('/', usuarioController.post);
+router.delete('/', usuarioController.del);
 
 
 module.exports = router;

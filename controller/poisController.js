@@ -1,27 +1,48 @@
+const MongoDB = require('../model/database/configDataBase');
 const Pois = require("../model/Pois");
 
+
 const get = (req, res) => {
-    res.status(200).json({
-        pois: Pois.pois
-    })
+    let pois_id = req.param.pois_id;
+
+    if (pois_id) {
+        Pois.findByUUID(pois_id, function(err, pois) {
+            if (err) res.send(err);
+            res.status(200).json({
+                Pois: pois
+            });
+        });
+    }
+    else {
+        Pois.getPois(function(err, pois) {
+            if (err) res.send(err);
+            res.status(200).json({
+                Pois: pois
+            });
+        });
+    }
 }
 
 const post = (req, res) => {
-    let pois = new Pois(req.body.titulo, req.body.lat, req.body.long);
-    Pois.add(pois);
-
-    res.status(200).json({
-        Pois: pois
+    var pois = new Pois({
+        titulo: req.body.titulo, 
+        lat: req.body.lat,
+        long: req.body.long
     });
+    Pois.add(pois, function(err, p) {
+        if (err) res.send(err);
+        res.status(201).json({
+            Pois: p
+        });
+    })
 } 
 
 const del = (req, res) => {
-    
-    Pois.remove(req.body.pois_id);
-
-    res.status(200).json({
-        message: "Pois borrado correctamente"
-    });
+    let pois_id = req.body.pois_id;
+    Pois.removeByUUID(pois_id, function(err, del) {
+        if (err) res.send(err);
+        res.status(200).send(del)
+    })
 } 
 
 module.exports = {

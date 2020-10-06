@@ -1,9 +1,8 @@
 var mongoose = require('mongoose');
 const uuid = require("uuid");
 
-// const Schema = mongoose.Schema;
- 
-var UsuarioSchema = mongoose.Schema({
+
+const UsuarioSchema = mongoose.Schema({
     user_id: { type: String, default: uuid.v4() },
     nombre: { type: String },
     apellido: { type: String },
@@ -16,8 +15,8 @@ UsuarioSchema.statics.createInstance = function(nombre, apellido) {
     });
 }
 
-UsuarioSchema.statics.getUsuarios = (cb) => {
-    return this.find({}, cb)
+UsuarioSchema.statics.getUsuarios = function(cb) {
+    return this.find({}, cb);
 }
 
 UsuarioSchema.statics.add = function(newUser, cb) {

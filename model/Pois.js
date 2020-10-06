@@ -1,32 +1,36 @@
 const mongoose = require('mongoose');
 const uuid = require("uuid");
 
-var Pois = function (titulo, lat, long) {
-    this.pois_id = uuid.v4();
-    this.titulo = titulo;
-    this.lat = lat;
-    this.long = long;
+
+const PoisSchema = mongoose.Schema({
+    pois_id: { type: String, default: uuid.v4() },
+    titulo: { type: String },
+    lat: { type: String },
+    long: { type: String },
+});
+
+PoisSchema.statics.createInstance = function(titulo, lat, long) {
+    return new this({
+        titulo: titulo,
+        lat: lat,
+        long: long
+    });
 }
 
-
-Pois.pois = [];
-Pois.add = function(newPois) {
-    Pois.pois.push(newPois);
+PoisSchema.statics.getPois = function(cb) {
+    return this.find({}, cb);
 }
 
-Pois.remove = function(pois_id) {
-    Pois.pois.forEach( (v, i) => {
-        if (v.pois_id == pois_id) {
-            Pois.pois.splice(i, 1);
-            return true;
-        }
-    })
+PoisSchema.statics.add = function(newPois, cb) {
+    this.create(newPois, cb);
 }
 
-let pois_1 = new Pois("Parque Lezama", -34.629506, -58.370583);
-let pois_2 = new Pois("El Obelisco", -34.603697, -58.381629);
+PoisSchema.statics.findByUUID = function(pois_id, cb) {
+    return this.findOne({pois_id: pois_id}, cb);
+}
 
-Pois.add(pois_1);
-Pois.add(pois_2);
+PoisSchema.statics.removeByUUID = function(pois_id, cb) {
+    return this.deleteOne({pois_id: pois_id}, cb);
+}
 
-module.exports = Pois;
+module.exports = mongoose.model("Pois", PoisSchema);
