@@ -33,6 +33,11 @@ app.use('/pois', routesPois);
 app.use('/users', routesUsuarios);
 
 
-app.listen(process.env.PORT || 8080, () => {
-    console.log("Servidor escuchando en el puerto 8080")
+const port = process.env.PORT || 8080;
+
+app.listen(port, () => {
+    console.log(`Servidor escuchando en el puerto ${port}`)
 })
+
+
+module.exports = app;

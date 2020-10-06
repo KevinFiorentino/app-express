@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const Usuario = require('../../model/Usuario');
+//const server = require('../../bin/www');
 
-describe("Testing Model", () => {
+
+describe("Testing Modelo", () => {
     
     beforeEach( done => {
         mongoose.connect("mongodb://localhost/usuarios", { useNewUrlParser: true })
@@ -15,21 +17,20 @@ describe("Testing Model", () => {
         });
     });
 
-    describe("Usuarios", () => {
+    describe("Conexión BBDD", () => {
 
-        it("Crear y borrar", (done) => {
+        it("Usuarios crear, obtener y borrar", (done) => {
             
-            var usuario = Usuario.createInstance("Kevin XAMPP", "Fiorentino");
+            var usuario = Usuario.createInstance("Kevin", "Testing BBDD");
 
             Usuario.add(usuario, function(err, newUser) {
                 Usuario.findByUUID(newUser.user_id, function(err, user) {
-                    expect(usuario.nombre).toBe("Kevin XAMPP");
+                    expect(usuario.nombre).toBe("Kevin");
 
                     Usuario.removeByUUID(newUser.user_id, function(err, del) {
                         expect(del.deletedCount).toBe(1);
                         done();
-                    })
-                    
+                    });
                 });
             })
         })
