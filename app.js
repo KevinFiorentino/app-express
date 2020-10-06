@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Rutas de la API
 app.use('/', indexRouter);
 app.use('/pois', routesPois);
-app.use('/users', routesPois);
+app.use('/users', routesUsuarios);
 
 
 app.listen(process.env.PORT || 8080, () => {

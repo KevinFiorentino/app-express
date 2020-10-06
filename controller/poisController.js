@@ -1,12 +1,12 @@
 const Pois = require("../model/Pois");
 
-const pois_list = (req, res) => {
+const get = (req, res) => {
     res.status(200).json({
         pois: Pois.pois
     })
 }
 
-const pois_create = (req, res) => {
+const post = (req, res) => {
     let pois = new Pois(req.body.titulo, req.body.lat, req.body.long);
     Pois.add(pois);
 
@@ -15,7 +15,7 @@ const pois_create = (req, res) => {
     });
 } 
 
-const pois_delete = (req, res) => {
+const del = (req, res) => {
     
     Pois.remove(req.body.pois_id);
 
@@ -25,7 +25,7 @@ const pois_delete = (req, res) => {
 } 
 
 module.exports = {
-    pois_list,
-    pois_create,
-    pois_delete
+    get,
+    post,
+    del
 }

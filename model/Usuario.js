@@ -1,26 +1,36 @@
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 const uuid = require("uuid");
 
-const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
+// const Schema = mongoose.Schema;
  
-const UsuarioSchema = new Schema({
-    user_id: String,
-    nombre: String,
-    apellido: String
+var UsuarioSchema = mongoose.Schema({
+    user_id: { type: String, default: uuid.v4() },
+    nombre: { type: String },
+    apellido: { type: String },
 });
+
+UsuarioSchema.statics.createInstance = function(nombre, apellido) {
+    return new this({
+        nombre: nombre,
+        apellido: apellido
+    });
+}
 
 UsuarioSchema.statics.getUsuarios = (cb) => {
     return this.find({}, cb)
 }
 
-UsuarioSchema.statics.createUsuario = (nombre, apellido) => {
-    return new this({
-        user_id: uuid.v4(),
-        nombre: nombre,
-        apellido, apellido
-    });
+UsuarioSchema.statics.add = function(newUser, cb) {
+    this.create(newUser, cb);
+}
+
+UsuarioSchema.statics.findByUUID = function(user_id, cb) {
+    return this.findOne({user_id: user_id}, cb);
+}
+
+UsuarioSchema.statics.removeByUUID = function(user_id, cb) {
+    return this.deleteOne({user_id: user_id}, cb);
 }
 
 
-module.exports = mongoose.model("Usuarios", UsuarioSchema);
+module.exports = mongoose.model("Usuario", UsuarioSchema);

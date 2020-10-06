@@ -3,9 +3,9 @@ const router = express.Router();
 const poisController = require("../controller/poisController");
 
 
-router.get('/', poisController.pois_list);
-router.post('/agregar', poisController.pois_create);
-router.delete('/eliminar', poisController.pois_delete);
+router.get('/', poisController.get);
+router.post('/agregar', poisController.post);
+router.delete('/eliminar', poisController.del);
 
 
 module.exports = router;
