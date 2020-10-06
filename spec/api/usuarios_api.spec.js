@@ -1,6 +1,6 @@
 const Usuario = require('../../model/Usuario');
 const request = require('request');
-const server = require('../../bin/www');
+// const server = require('../../bin/www');
 
 
 describe("Testing API", () => {
@@ -17,7 +17,7 @@ describe("Testing API", () => {
                 url:'http://localhost:8080/users', 
                 body: JSON.stringify(usuario)
             }, (error, response, body) => {
-                if(error) console.error('Error:', error);
+                if(error) console.error('Error:', error); done();
 
                 let data = JSON.parse(body);
 

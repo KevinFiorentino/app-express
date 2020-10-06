@@ -1,11 +1,18 @@
-var mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const uuid = require("uuid");
+const Pois = require("./Pois.js")
 
 
 const UsuarioSchema = mongoose.Schema({
     user_id: { type: String, default: uuid.v4() },
     nombre: { type: String },
     apellido: { type: String },
+    pois: 
+        { 
+            type: [ mongoose.Schema.Types.ObjectId ], 
+            ref: 'Pois',
+            default: [] 
+        }
 });
 
 UsuarioSchema.statics.createInstance = function(nombre, apellido) {

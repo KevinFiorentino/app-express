@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Usuario = require('../../model/Usuario');
-//const server = require('../../bin/www');
+// const server = require('../../bin/www');
 
 
 describe("Testing Modelo", () => {
