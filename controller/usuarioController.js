@@ -25,7 +25,9 @@ const get = (req, res) => {
 const post = (req, res) => {
     var usuario = new Usuario({
         nombre: req.body.nombre, 
-        apellido: req.body.apellido
+        apellido: req.body.apellido,
+        email: req.body.email,
+        password: req.body.password
     });
     Usuario.add(usuario, function(err, user) {
         if (err) res.send(err);

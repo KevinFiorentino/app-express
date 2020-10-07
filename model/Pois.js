@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const uuid = require("uuid");
 
 
-const PoisSchema = mongoose.Schema({
+const PoisSchema = new mongoose.Schema({
     pois_id: { type: String, default: uuid.v4() },
     titulo: { type: String },
     lat: { type: String },
