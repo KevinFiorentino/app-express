@@ -8,6 +8,7 @@ const sassMiddleware = require('node-sass-middleware');
 const indexRouter = require('./routes/index');
 const routesPois = require('./routes/routesPois');
 const routesUsuarios = require('./routes/routesUsuarios');
+const routesToken = require('./routes/routesToken');
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/pois', routesPois);
 app.use('/users', routesUsuarios);
+app.use('/token', routesToken);
 
 
 const port = process.env.PORT || 8080;

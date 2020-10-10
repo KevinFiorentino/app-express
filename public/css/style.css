@@ -19,4 +19,8 @@ input, .helper-text {
 .fichaMarkerMapa {
   text-align: center; }
 
+.card-form {
+  padding: 15px !important;
+  box-shadow: 0 2px 4px white; }
+
 /*# sourceMappingURL=style.css.map */

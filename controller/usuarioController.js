@@ -1,9 +1,12 @@
 const MongoDB = require('../model/database/configDataBase');
 const Usuario = require("../model/Usuario");
+const Token = require("../model/Token");
+const crypto = require("crypto");
 
+const mailer = require("../mailer/mailer")
 
 const get = (req, res) => {
-    let user_id = req.param.user_id;
+    let user_id = req.params.user_id;
 
     if (user_id) {
         Usuario.findByUUID(user_id, function(err, user) {
@@ -29,11 +32,32 @@ const post = (req, res) => {
         email: req.body.email,
         password: req.body.password
     });
-    Usuario.add(usuario, function(err, user) {
-        if (err) res.send(err);
-        res.status(201).json({
-            Usuario: user
-        });
+    Usuario.add(usuario, function(errUser, user) {
+        if (errUser) res.send(errUser);
+
+        Token.create({_userId: user._id, token: crypto.randomBytes(20).toString("hex")}, (errToken, token) => {
+            if (errToken) res.send(errToken);
+
+            const email_to = user.email;
+
+            const emailOption = {
+                from: "no-reply@kevinappexpress.com",
+                to: "dale.mante@ethereal.email",
+                subject: "Kevin - Confirmación de cuenta",
+                text: "Hola!"
+            }
+
+            mailer.sendMail(emailOption, (errEmail, info) => {
+                if (errEmail) res.send(errEmail);
+
+                console.log("Un email de confirmación ha sido enviado")
+            })
+/*
+            res.status(201).json({
+                Usuario: user
+            });
+            */
+        })
     })
 }
 

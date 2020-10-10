@@ -3,7 +3,7 @@ const Pois = require("../model/Pois");
 
 
 const get = (req, res) => {
-    let pois_id = req.param.pois_id;
+    let pois_id = req.params.pois_id;
 
     if (pois_id) {
         Pois.findByUUID(pois_id, function(err, pois) {
