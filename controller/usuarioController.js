@@ -35,7 +35,7 @@ const post = (req, res) => {
     Usuario.add(usuario, function(errUser, user) {
         if (errUser) res.send(errUser);
 
-        Token.create({_userId: user._id, token: crypto.randomBytes(20).toString("hex")}, (errToken, token) => {
+        Token.create({_userId: user._id, token: crypto.randomBytes(12).toString("hex")}, (errToken, token) => {
             if (errToken) res.send(errToken);
 
             const email_to = user.email;

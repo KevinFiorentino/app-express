@@ -72,6 +72,12 @@ UsuarioSchema.statics.add = function(newUser, cb) {
     this.create(newUser, cb);
 }
 
+// Busqueda por ID de Mongo
+UsuarioSchema.statics.findById = function(user_id, cb) {
+    return this.findOne({_id: user_id}, cb);
+}
+
+// Busqueda por UUID
 UsuarioSchema.statics.findByUUID = function(user_id, cb) {
     return this.findOne({user_id: user_id}, cb);
 }

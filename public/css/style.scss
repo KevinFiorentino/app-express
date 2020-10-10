@@ -4,6 +4,7 @@ body {
     color: white;
 }
 .title-app {
+    font-weight: bold;
     text-align: center;
 }
 a {
@@ -22,6 +23,11 @@ input, .helper-text {
 }
 
 .card-form {
-    padding: 15px !important;
-    box-shadow: 0 2px 4px white;
+    padding: 20px !important;
+    box-shadow: 0 6px 9px #00000029;
+    background-color: #00000029;
+
+    h5 {
+        font-weight: bold;
+    }
 }
