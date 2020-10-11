@@ -1,9 +1,9 @@
-const MongoDB = require('../model/database/configDataBase');
+const MongoDB = require('../config/configDataBase');
 const Usuario = require("../model/Usuario");
 const Token = require("../model/Token");
 const crypto = require("crypto");
-
-const mailer = require("../mailer/mailer")
+ 
+const mailer = require("../config/mailer")
 
 const get = (req, res) => {
     let user_id = req.params.user_id;
@@ -53,12 +53,6 @@ const post = (req, res) => {
                 console.log("Un email de confirmación ha sido enviado")
 
                 res.redirect("/")
-
-                /*
-                res.status(201).json({
-                    Usuario: user
-                });
-                */
             })
 
         })

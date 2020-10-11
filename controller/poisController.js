@@ -1,7 +1,7 @@
-const MongoDB = require('../model/database/configDataBase');
+const MongoDB = require('../config/configDataBase');
 const Pois = require("../model/Pois");
 
-
+ 
 const get = (req, res) => {
     let pois_id = req.params.pois_id;
 
