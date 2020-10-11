@@ -9,17 +9,11 @@ const get = (req, res) => {
 
     Token.findOne({ token: token }, (errToken, token) => {
         if (errToken) return res.status(500).json({ error: errToken });
-        if (!token) return res.status(400);
-        Usuario.findById(token._userId, (errUser, usuario) => {
-            if (errUser) return res.status(500).json({ error: errUser });
-            if (usuario.verificado) return res.redirect("/index");
-            usuario.verificado = true;
-            usuario.save( err => {
-                if (err) return res.status(500).json({ error: err });
-                //res.redirect("/index")
-                console.log("CALLBACK")
-                res.status(200).json({ msg: "OK"});
-            })
+        if (!token) console.log("Ningún token encontrado")
+        Usuario.findByIdAndUpdate(token._userId, { verificado: true }, (err, user) => {
+            if (err) return res.status(500).json({ error: errUser });
+
+            res.redirect("/")
         })
     })
 }

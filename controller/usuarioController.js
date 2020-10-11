@@ -42,23 +42,31 @@ const post = (req, res) => {
 
             const emailOption = {
                 from: "no-reply@kevinappexpress.com",
-                to: "dale.mante@ethereal.email",
+                to: email_to,
                 subject: "Kevin - Confirmación de cuenta",
-                text: "Hola!"
+                html: "Confirme su cuenta haciendo click en el siguiente enlace: <a href='http://localhost:8080/token/"+token.token+"'>Activar mi cuenta!!</a>"
             }
 
             mailer.sendMail(emailOption, (errEmail, info) => {
                 if (errEmail) res.send(errEmail);
 
                 console.log("Un email de confirmación ha sido enviado")
+
+                res.redirect("/")
+
+                /*
+                res.status(201).json({
+                    Usuario: user
+                });
+                */
             })
-/*
-            res.status(201).json({
-                Usuario: user
-            });
-            */
+
         })
     })
+}
+
+const put = (req, res) => {
+
 }
 
 const del = (req, res) => {
