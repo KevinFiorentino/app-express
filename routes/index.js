@@ -17,7 +17,7 @@ router.post('/login', function(req, res, next) {
         if (!usuario) res.sendFile(process.cwd()+'/public/login.html');
         req.logIn(usuario, function(err) {
             if (err) return next(err);
-            res.sendFile(process.cwd()+'/public/index.html');
+            res.sendFile(process.cwd()+'/public/home.html');
         });
     })(req, res, next);
 })
@@ -35,12 +35,11 @@ router.get('/singup', function (req, res, next) {
 
 /* Home page */
 router.get('/', loggedIn, function (req, res, next) {
-    res.sendFile(process.cwd()+'/public/index.html');
+    res.sendFile(process.cwd()+'/public/home.html');
 });
 
 
 function loggedIn(req, res, next) {
-    console.log("LOGGEDIN")
     if (req.user) {
         next();
     }
