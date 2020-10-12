@@ -20,14 +20,14 @@
 			<div class="card-form col offset-s3 s6">
 
 				<h5>Login</h5>
-				<form onsubmit="return false;">
+				<form method="POST" action="http://localhost:8080/login">
 					<div class="row">
 						<div class="input-field col s12">
-							  <input id="email" type="email" class="validate">
+							  <input id="email" name="email" type="email" class="validate" required>
 							  <label for="email">Correo electrónico</label>
 						</div>
 						<div class="input-field col s12">
-							  <input id="password" type="password" class="validate">
+							  <input id="password" name="password" type="password" class="validate" required>
 							  <label for="password">Password</label>
 						</div>
 					</div>
