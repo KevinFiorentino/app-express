@@ -55,6 +55,8 @@ const post = (req, res) => {
                 console.log("Un email de confirmación ha sido enviado");
 
                 res.redirect("/login")
+
+                return;
             })
 
         })
