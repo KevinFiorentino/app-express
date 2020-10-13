@@ -11,6 +11,8 @@
 - Express
 - @usig-gcba/mapa-interactivo
 - Mongoose
+- nodemailer
+- nodemailer-sendgrid-transport
 - Jasmine
 - Passport
 - Passport-local

@@ -3,7 +3,7 @@ const sgTransport = require("nodemailer-sendgrid-transport")
 
 let mailConfig;
 
-if (process.env.ENVIRONMENT == "development") {
+if (process.env.ENVIRONMENT === "development") {
     // https://ethereal.email/
     mailConfig = {
         host: 'smtp.ethereal.email',
@@ -15,7 +15,7 @@ if (process.env.ENVIRONMENT == "development") {
     };
     
 }
-else if (process.env.ENVIRONMENT == "production") {
+else if (process.env.ENVIRONMENT === "production") {
     // https://signup.sendgrid.com/
     const options = {
         auth: {
