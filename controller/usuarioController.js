@@ -54,7 +54,8 @@ const post = (req, res) => {
 
                 console.log("Un email de confirmación ha sido enviado");
 
-                res.redirect("https://kevin-app-express.herokuapp.com/login")
+                //res.redirect("login")
+                res.sendFile(process.cwd()+'/public/login.html');
             })
 
         })
