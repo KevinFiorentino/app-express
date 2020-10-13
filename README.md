@@ -14,6 +14,7 @@
 - Jasmine
 - Passport
 - Passport-local
+- JWT
 
 ---
 ##### Proyecto realizado en el marco del Curso de NodeJS, Express y MongoDB
