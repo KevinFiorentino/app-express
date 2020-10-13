@@ -44,6 +44,7 @@ const post = (req, res) => {
                 from: "no-reply@kevinappexpress.com",
                 to: email_to,
                 subject: "Kevin - Confirmación de cuenta",
+                text: "Envio de emails de prueba con Nodemailer",
                 html: "Confirme su cuenta haciendo click en el siguiente enlace: <a href='http://localhost:8080/token/"+token.token+"'>Activar mi cuenta!!</a>"
             }
 

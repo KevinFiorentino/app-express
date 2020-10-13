@@ -5,6 +5,7 @@ let mailConfig;
 
 if (process.env.ENVIRONMENT === "development") {
     // https://ethereal.email/
+    console.log("EMAILER: ", "https://ethereal.email/");
     mailConfig = {
         host: 'smtp.ethereal.email',
         port: 587,
@@ -17,9 +18,10 @@ if (process.env.ENVIRONMENT === "development") {
 }
 else if (process.env.ENVIRONMENT === "production") {
     // https://signup.sendgrid.com/
+    console.log("EMAILER: ", "https://signup.sendgrid.com/");
     const options = {
         auth: {
-            api_key: process.env.SENDGRID_KEY
+            api_key: process.env.SENDGRID_API_KEY
         }
     }
     mailConfig = sgTransport(options)
