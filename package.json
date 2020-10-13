@@ -6,6 +6,10 @@
     "start": "node ./bin/www",
     "devstart": "nodemon app.js"
   },
+  "engines": {
+    "node": "12.18.2",
+    "npm": "6.14.5"
+  },
   "dependencies": {
     "@usig-gcba/mapa-interactivo": "^1.2.5",
     "bcrypt": "^5.0.0",
