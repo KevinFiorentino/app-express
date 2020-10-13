@@ -42,8 +42,8 @@ const post = (req, res) => {
             console.log("ENVIAR EMAIL A: ", email_to);
 
             const emailOption = {
+                to: [ email_to ],
                 from: "kevinfiorentino.1294@gmail.com",
-                to: email_to,
                 subject: "Kevin - Confirmación de cuenta",
                 text: "Envio de emails de prueba con Nodemailer",
                 html: "Confirme su cuenta haciendo click en el siguiente enlace: <a href='http://localhost:8080/token/"+token.token+"'>Activar mi cuenta!!</a>"
@@ -55,8 +55,6 @@ const post = (req, res) => {
                 console.log("Un email de confirmación ha sido enviado");
 
                 res.redirect("/login")
-
-                return;
             })
 
         })
