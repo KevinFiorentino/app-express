@@ -42,7 +42,7 @@ const post = (req, res) => {
             console.log("ENVIAR EMAIL A: ", email_to);
 
             const emailOption = {
-                from: "no-reply@kevinappexpress.com",
+                from: "kevinfiorentino.1294@gmail.com",
                 to: email_to,
                 subject: "Kevin - Confirmación de cuenta",
                 text: "Envio de emails de prueba con Nodemailer",
@@ -52,9 +52,9 @@ const post = (req, res) => {
             mailer.sendMail(emailOption, (errEmail, info) => {
                 if (errEmail) res.send(errEmail);
 
-                console.log("Un email de confirmación ha sido enviado")
+                console.log("Un email de confirmación ha sido enviado");
 
-                res.redirect("/")
+                res.sendFile(process.cwd()+'/public/home.html');
             })
 
         })
