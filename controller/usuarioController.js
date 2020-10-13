@@ -50,7 +50,7 @@ const post = (req, res) => {
             }
 
             mailer.sendMail(emailOption, (errEmail, info) => {
-                if (errEmail) res.send(errEmail);
+                if (errEmail) res.redirect("/login");
 
                 console.log("Un email de confirmación ha sido enviado");
 
