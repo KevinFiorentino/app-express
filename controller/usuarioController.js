@@ -39,6 +39,7 @@ const post = (req, res) => {
             if (errToken) res.send(errToken);
 
             const email_to = user.email;
+            console.log("ENVIAR EMAIL A: ", email_to);
 
             const emailOption = {
                 from: "no-reply@kevinappexpress.com",
