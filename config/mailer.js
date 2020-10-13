@@ -4,6 +4,7 @@ const sgTransport = require("nodemailer-sendgrid-transport")
 let mailConfig;
 
 if (process.env.ENVIRONMENT == "development") {
+    // https://ethereal.email/
     mailConfig = {
         host: 'smtp.ethereal.email',
         port: 587,
@@ -18,7 +19,7 @@ else if (process.env.ENVIRONMENT == "production") {
     // https://signup.sendgrid.com/
     const options = {
         auth: {
-            api_key: process.env.SENGRID_KEY
+            api_key: process.env.SENDGRID_KEY
         }
     }
     mailConfig = sgTransport(options)
