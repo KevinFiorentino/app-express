@@ -17,6 +17,7 @@
 - Passport
 - Passport-local
 - JWT
+- NewRelic
 
 ---
 ##### Proyecto realizado en el marco del Curso de NodeJS, Express y MongoDB
