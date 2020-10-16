@@ -6,7 +6,6 @@ const passport = require('../config/passport');
 
 /* Login */
 router.get('/login', function (req, res) {
-    //res.sendFile('/home/kevin/KevinWorkspace/app-express/public/login.html');
     res.sendFile(process.cwd()+'/public/login.html');
 });
 
@@ -17,7 +16,7 @@ router.post('/login', function(req, res, next) {
         if (!usuario) res.sendFile(process.cwd()+'/public/login.html');
         req.logIn(usuario, function(err) {
             if (err) return next(err);
-            res.sendFile(process.cwd()+'/public/home.html');
+            res.redirect("/");
         });
     })(req, res, next);
 })

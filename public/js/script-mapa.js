@@ -17,10 +17,10 @@ var icon = L.icon({
 $.ajax({
     type: "GET",
     dataType: "json",
-    url: "http://localhost:8080/pois",
+    url: "/pois",
     success: function(response_api) {
 
-        response_api.pois.forEach( (value, index) => {
+        response_api.Pois.forEach( (value, index) => {
             var marker = L.marker([value.lat, value.long], {icon: icon});
 
             marker.addTo(mapaInteractivo.map)
@@ -58,7 +58,7 @@ function agregar_punto() {
                 type: "POST",
                 dataType: "json",
                 data: data,
-                url: "http://localhost:8080/pois/agregar",
+                url: "/pois",
                 success: function(response_api) {
 
                     var marker = L.marker([response_api.Pois.lat, response_api.Pois.long], {icon: icon});

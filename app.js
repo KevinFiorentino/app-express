@@ -59,7 +59,8 @@ app.use((req, res, next) => {
 
 // Rutas de la API
 app.use('/', indexRouter);
-app.use('/pois', validarUsuarioJWT, routesPois);
+//app.use('/pois', validarUsuarioJWT, routesPois);
+app.use('/pois', routesPois);
 app.use('/users', routesUsuarios);
 app.use('/token', routesToken);
 app.use('/auth', routesAuth);
