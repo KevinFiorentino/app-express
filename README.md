@@ -17,6 +17,7 @@
 - Passport
 - Passport-local
 - JWT
+- connect-mongodb-session
 - NewRelic
 
 ---

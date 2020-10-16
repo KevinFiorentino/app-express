@@ -8,6 +8,7 @@ const cors = require('cors');
 const sassMiddleware = require('node-sass-middleware');
 const passport = require('./config/passport');
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const jwt = require('jsonwebtoken');
 
 const indexRouter = require('./routes/index');
@@ -15,20 +16,36 @@ const routesPois = require('./routes/routesPois');
 const routesUsuarios = require('./routes/routesUsuarios');
 const routesToken = require('./routes/routesToken');
 const routesAuth = require('./routes/routesAuth');
+const { assert } = require('console');
 
 const app = express();
 
 app.set('secretKey', 'secret_kevin_jwt');
 
-// Configuración Passport-Express
-const storeSession = new session.MemoryStore;
+
+// Configuración Express-Sessions
+let store;
+if (process.env.ENVIRONMENT === "development") {
+    store = new session.MemoryStore;
+}
+else {
+    store = new MongoDBStore({
+        uri: process.env.MONGO_CONNECTION_STRING,
+        collection: 'sessions'
+    });
+    store.on('error', function(err) {
+        assert.ifError(error);
+        assert.ok(false);
+    })
+}
 app.use(session({
     cookie: { maxAge: 86000 }, 
-    store: storeSession,
+    store: store,
     saveUninitialized: true,
     resave: 'true',
     secret: 'kevin_secret'
 }));
+// END Express Session
 
 // Configuración de Express
 app.use(logger('dev'));
@@ -85,7 +102,6 @@ function validarUsuarioJWT(req, res, next) {
         }
     })
 }
-
 
 
 module.exports = app;
